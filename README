@@ -1,0 +1,7 @@
+# Hello!
+
+This is my project for the tabular data competition of september from kaggle.
+
+I'm going to build a neural network (hopefully one that can actually learn) and compare it to XGBoost and LGBM. 
+
+It's my first time dealing with this much data and the objective is to learn how to build a good NN, explore XGBoost, LGBM and hyperparameter tuning with OPTUNA.
