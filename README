@@ -2,4 +2,4 @@ Hello!
 
 This is my project for the tabular data competition of september from kaggle.
 
-It consists of a model of a LGBMClassifier model tuned with Optuna with roc_auc score of 81.58% in Kaggle public leaderboard.
+It consists of a model of a LGBMClassifier model tuned with Optuna with roc_auc score of 81.58% in Kaggle's public leaderboard.
