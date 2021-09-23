@@ -34,14 +34,17 @@ def reduce_mem_usage(df, verbose=True):
 
 if __name__ == '__main__':
     # Reduce memory usage
-    df_red = reduce_mem_usage(pd.read_csv(r'Data/train.csv',index_col='id'))
-    df_val_red = reduce_mem_usage(pd.read_csv(r'Data/test.csv',index_col='id'))
-    # sampling df bc its too big
-    df_samp_red = reduce_mem_usage(df_red.sample(int(len(df_red) * 0.2)))
+    try:
+        df_red = reduce_mem_usage(pd.read_csv(r'Data/train.csv', index_col='id'))
+        df_val_red = reduce_mem_usage(pd.read_csv(r'Data/test.csv', index_col='id'))
+        # sampling df bc its too big
+        df_samp_red = reduce_mem_usage(df_red.sample(int(len(df_red) * 0.2)))
 
 
-    # Save reduced df to disk
-    df_red.to_csv(r'Data/train_reduced.csv')
-    df_val_red.to_csv(r'Data/test_reduced.csv')
-    # Save reduced sampled df to disk
-    df_samp_red.to_csv(r'Data/train_sampled_reduced.csv')
+        # Save reduced df to disk
+        df_red.to_csv(r'Data/train_reduced.csv')
+        df_val_red.to_csv(r'Data/test_reduced.csv')
+        # Save reduced sampled df to disk
+        df_samp_red.to_csv(r'Data/train_sampled_reduced.csv')
+    except Exception as err:
+        print(err)

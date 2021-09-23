@@ -12,11 +12,11 @@ try:
     RANDOM_SEED = 42
     seed_everything(RANDOM_SEED)
 
-    #load data
-    df = pd.read_csv(r'Data/train_sampled_red.csv',index_col='id')
+    #load Data
+    df = pd.read_csv(r'Data/train_sampled_red.csv', index_col='id')
     x = df.drop('claim', axis=1)
     y= df.claim
-    #split the data
+    #split the Data
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state= RANDOM_SEED)
 
     pipe_baseline.fit_transform(x_train,y_train)
