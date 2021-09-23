@@ -1,6 +1,13 @@
 import pandas as pd
 import numpy as np
+import os, random, time
 from sklearn.model_selection import train_test_split
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+from lightgbm import LGBMRegressor, LGBMClassifier
+import lightgbm as lgb
+RANDOM_SEED = 42
 
 #=================== Pre processing ==================
 class preprocess(BaseEstimator, TransformerMixin):
@@ -72,14 +79,29 @@ def seed_everything(seed=RANDOM_SEED):
     random.seed(seed)
 
 #=================== Optimization ========================
-def objective(trial, data=x, target=y,model_algo, grid_param):
+
+def objective(trial, data, target):
     """ objetive function to be optmized by optuna """
+
+    lgbm_params = {
+        'num_leaves': trial.suggest_int('num_leaves', 10, 2000),
+        'max_depth': trial.suggest_int('max_depth', 7, 12),
+        'min_data_in_leaf': trial.suggest_int('min_data_in_leaf', 500, 2000),
+        'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.3),
+        'n_estimators': trial.suggest_int('n_estimators', 100, 900),
+        'lambda_l1': trial.suggest_float('lambda_l1', 1e-8, 10.0, log=True),
+        'lambda_l2': trial.suggest_float('lambda_l2', 1e-8, 10.0, log=True),
+        'min_gain_to_split': trial.suggest_float('min_gain_to_split', 0, 15),
+        'bagging_fraction': trial.suggest_float('bagging_fraction', 0.1, 0.9),
+        'bagging_freq': trial.suggest_int('bagging_freq', 2, 10),
+        'random_state': 42,
+        'num_threads': -1}
 
     # split the data
     train_x, valid_x, train_y, valid_y = train_test_split(data, target, test_size=0.3)
 
     # the model
-    model = LGBMRegressor(**lgbm_space)
+    model = LGBMRegressor(**lgbm_params)
     # fit the data
     model.fit(train_x, train_y)
     # predict
