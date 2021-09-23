@@ -79,11 +79,12 @@ def objective(trial, data=x, target=y,model_algo, grid_param):
     train_x, valid_x, train_y, valid_y = train_test_split(data, target, test_size=0.3)
 
     # the model
-    model = model_algo(**grid_param)
+    model = LGBMRegressor(**lgbm_space)
     # fit the data
     model.fit(train_x, train_y)
     # predict
-    pred = model.predict_proba(valid_x)
+    pred = model.predict(valid_x)
     # score
-    roc_auc = roc_auc_score(valid_y, pred[:, 1])
+    roc_auc = roc_auc_score(valid_y, pred)
     return roc_auc
+

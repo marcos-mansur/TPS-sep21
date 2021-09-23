@@ -33,7 +33,7 @@ study= optuna.create_study(direction='maximize')
 # load and resume previous Study
 #Study = joblib.load("Study/Study.pkl")
 # optimize
-study.optimize(lambda trial: objective(trial,x,y,model,lgbm_space),  n_trials=100)
+study.optimize(lambda trial: objective(trial,x,y),  n_trials=100)
 
 #print results
 print("Best trial until now:")

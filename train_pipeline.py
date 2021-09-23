@@ -25,4 +25,3 @@ score_baseline = roc_auc_score(y_test,pred_baseline[:,1])
 
 pipe_lgbm.fit_transform(x_train,y_train)
 pred_lgbm = pipe_lgbm.predict_proba(x_test)
-
