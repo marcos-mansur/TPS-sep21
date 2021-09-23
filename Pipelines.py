@@ -3,7 +3,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.imputer import SimpleImputer
 from Functions import preprocess
 from lightgbm import LGBMClassifier
-
+RANDOM_SEED= 42
 
 pipe_baseline = make_pipeline(LGBMClassifier(random_state=RANDOM_SEED))
 
