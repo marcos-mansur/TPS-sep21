@@ -5,7 +5,7 @@ import joblib
 import pandas as pd
 
 RANDOM_SEED =42
-# load data
+# load Data
 df = pd.read_csv('Data/train_sampled_reduced', index='id')  # loading sampled of 20% of df
 x = df.drop('claim', axis=1)
 y = df.claim

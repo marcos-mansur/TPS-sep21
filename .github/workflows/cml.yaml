@@ -10,14 +10,14 @@ jobs:
     - uses: iterative/setup-cml@v1
     - name: Train model
       run: |
-      pip install -r requeriments.txt
-      python train_pipeline.py
-      - name: Write CML report
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Post reports as comments in GitHub PRs
-          echo " Métricas Modelos  " > report1.md
-          # cat Modelos.md >> report1.md
+        pip install -r requeriments.txt
+        python train_pipeline.py
+    - name: Write CML report
+      env:
+        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Post reports as comments in GitHub PRs
+        echo " Métricas Modelos  " > report1.md
+        # cat Modelos.md >> report1.md
 
-          cml-send-comment report1.md
+        cml-send-comment report1.md
