@@ -11,7 +11,7 @@ jobs:
     - name: Train model
       run: |
         pip install -r requeriments.txt
-        py train_pipeline.py
+        python train_pipeline.py
     - name: Write CML report
       env:
         REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
