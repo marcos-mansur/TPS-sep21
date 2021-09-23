@@ -97,12 +97,12 @@ def objective(trial, data, target):
         'random_state': 42,
         'num_threads': -1}
 
-    # split the data
+    # split the Data
     train_x, valid_x, train_y, valid_y = train_test_split(data, target, test_size=0.3)
 
     # the model
     model = LGBMRegressor(**lgbm_params)
-    # fit the data
+    # fit the Data
     model.fit(train_x, train_y)
     # predict
     pred = model.predict(valid_x)
